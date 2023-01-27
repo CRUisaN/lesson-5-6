@@ -12,7 +12,11 @@ class Human:
         self.home = House()
 
     def get_car(self):
-        self.car = Auto(brands_of_car)
+        self.car = Auto(brand_list = {
+        "BMW": {"fuel": 100, "strength": 130, "consumption": 10},
+        "Lada": {"fuel": 50, "strength": 40, "consumption": 6},
+        "Volvo": {"fuel": 70, "strength": 100, "consumption": 8},
+        "Ferrari": {"fuel": 80, "strength": 150, "consumption": 14}})
 
     def get_job(self):
         if self.car.drive():
@@ -20,7 +24,12 @@ class Human:
         else:
             self.to_repair()
             return
-        self.job = job(job_list)
+        self.job = Job(job_list = {
+        "Java developer": {"salary": 50, "gladness": 10},
+        "Python developer": {"salary": 40, "gladness": 3},
+        "C++ developer": {"salary": 45, "gladness": 25},
+        "Rust developer": {"salary": 70, "gladness": 1}})
+
     def eat(self):
         if self.home.food <= 0:
             self.shopping("Food")
@@ -108,7 +117,7 @@ class Human:
         if self.satiety < 0:
             print("Голод")
             return False
-        if self.money < 500:
+        if self.money < -500:
             print("Банкротство")
             return False
 
@@ -120,10 +129,10 @@ class Human:
             self.get_home()
         if self.car is None:
             self.get_car()
-            print(f"Я купив машину{self.car.brand}")
+            print(f"Я купив машину{self.car}")
         if self.job is None:
             self.get_job()
-            print(f"Я не маю роботи, я іду отримати роботу{self.job.job} з зарплатою {self.job.salary}")
+            print(f"Я не маю роботи, я іду отримати роботу{self.job} з зарплатою {self.job}")
         self.days_indexes()
         dice=random.randint(1,4)
         if self.satiety<20:
@@ -190,9 +199,9 @@ class Job:
         "C++ developer": {"salary": 45, "gladness": 25},
         "Rust developer": {"salary": 70, "gladness": 1}}
 
-nick=Human(name="Nick")
+Human=Human(name="Human")
 for day in range(1, 8):
-    if nick.live(day)==False:
+    if Human.live(day)==False:
         break
 
 
